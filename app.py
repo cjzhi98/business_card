@@ -134,14 +134,14 @@ def insert_relationship():
 @app.route("/insert_job", methods=['POST'])
 def insert_job():
     cursor = cnx.cursor()
-    # try:
-    job_title = request.args.get("job_title")
-    cursor.execute(f"""INSERT INTO job (job_title) 
-                VALUES ('{job_title}');""")
-    cnx.commit()
-    return {'status': 'success', 'job_title': job_title}
-    # except:
-    #     return {'status': 'error'}
+    try:
+        job_title = request.args.get("job_title")
+        cursor.execute(f"""INSERT INTO job (job_title) 
+                    VALUES ('{job_title}');""")
+        cnx.commit()
+        return {'status': 'success', 'job_title': job_title}
+    except:
+        return {'status': 'error'}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
